@@ -17,7 +17,7 @@ let currFolder;
 
 async function getSongs(folder) {
     currFolder=folder;
-    let a = await fetch(`https://github.com/PrabhatPrajapati09/Potifier-music-player/tree/main/songs/${folder}/`);
+    let a = await fetch(`https://github.com/PrabhatPrajapati09/Potifier-music-player/tree/main/songs/${folder}/`, { mode: 'no-cors'});
     let response = await a.text();
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -73,7 +73,7 @@ const playMusic = (track, pause=false) => {
 }
 
 async function displayAlbums() {
-    let a = await fetch(`https://github.com/PrabhatPrajapati09/Potifier-music-player/tree/main/songs`);
+    let a = await fetch(`https://github.com/PrabhatPrajapati09/Potifier-music-player/tree/main/songs`, { mode: 'no-cors'});
     let response = await a.text();
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -86,7 +86,7 @@ async function displayAlbums() {
         if(e.href.includes("/songs/")){
             let folder = (e.href.split("/").slice(-1)[0]);
             //get the metadata of the folder
-            let a = await fetch(`https://github.com/PrabhatPrajapati09/Potifier-music-player/tree/main/songs/${folder}/info.json`);
+            let a = await fetch(`https://github.com/PrabhatPrajapati09/Potifier-music-player/tree/main/songs/${folder}/info.json`, { mode: 'no-cors'});
             let response = await a.json();
             console.log(response);
             cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
@@ -116,7 +116,7 @@ async function displayAlbums() {
 
 async function main() {
     //get the list of songs
-    await getSongs("songs/liked");
+    await getSongs("songs/love songs");
     playMusic(songs[0],true);
 
     //display all the albums on the page
